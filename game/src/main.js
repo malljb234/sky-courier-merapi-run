@@ -1,4 +1,4 @@
-// Sky Courier: Merapi Run — boot, the screen state machine, the fixed-step
+// Merapi Vector (Elang-7) — boot, the screen state machine, the fixed-step
 // loop, and the screenshot mode. The game plays with keyboard and mouse,
 // runs offline from its own files, and needs no network request.
 import { CONFIG } from './config.js';
@@ -113,8 +113,9 @@ function runGame() {
 
   function titleLines() {
     const lines = [
-      { text: 'SKY COURIER', style: 'title' },
-      { text: 'Merapi Run — a morning over the island', style: 'big' },
+      { text: 'MERAPI VECTOR', style: 'title' },
+      { text: '(ELANG-7) — 3D Tactical Flight Simulator', style: 'big' },
+      { text: 'OPERATION MERAPI VECTOR · OP-MV-07 · CALLSIGN ELANG-7', color: '#ffc857' },
       { text: 'Arrows / WASD steer · Shift / Ctrl throttle · Space acts · P pauses · M mutes', color: '#9fc6dd' },
       { text: '', style: 'plain' },
     ];
@@ -130,20 +131,27 @@ function runGame() {
 
   function briefingLines() {
     const m = world.mission;
-    return [
+    const lines = [
       { text: m.name.toUpperCase(), style: 'title' },
-      { text: m.tagline, style: 'big' },
+      { text: 'OPERATION MERAPI VECTOR · OP-MV-07 · CALLSIGN ELANG-7', style: 'big' },
+      { text: m.tagline, color: '#d7edf8' },
       { text: 'Fly gentle: full throttle drinks the fuel, and the island is not forgiving.', color: '#9fc6dd' },
       { text: '', style: 'plain' },
-      { text: 'Press Enter or click to take off', color: '#ffc857' },
     ];
+    for (const objective of m.objectives ?? []) {
+      lines.push({ text: `▸ ${objective}`, color: '#ffc857' });
+    }
+    lines.push({ text: '', style: 'plain' });
+    lines.push({ text: 'Press Enter or click to take off', color: '#ffc857' });
+    return lines;
   }
 
   function debriefLines() {
     const state = world.missionState;
     const lines = [
       { text: state.failed ? 'SORTIE FAILED' : 'SORTIE COMPLETE', style: 'title' },
-      { text: state.finishReason, style: 'big' },
+      { text: 'OPERATION MERAPI VECTOR · ELANG-7', style: 'big' },
+      { text: state.finishReason, color: '#d7edf8' },
       { text: `SCORE ${state.score}`, color: '#ffc857' },
     ];
     for (const line of state.scoreLines.slice(-5)) lines.push({ text: line, color: '#d7edf8' });

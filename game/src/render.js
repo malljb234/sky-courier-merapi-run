@@ -254,6 +254,25 @@ export function renderScene(ctx, world, width, height, time, options = {}) {
     drawGroundShadow(ctx, shadowAt.x, shadowAt.y, Math.max(4, 26 * shadowAt.scale * 0.024), alpha);
   }
   if (planeAt) {
+    // Wingman in formation, 14 m to starboard and 12 m ahead: the sortie
+    // flies as a pair, and the frame says tactical at a glance.
+    if (!flight.crashed) {
+      const sinH = Math.sin(flight.heading);
+      const cosH = Math.cos(flight.heading);
+      const wingAt = project(
+        camera,
+        flight.x + cosH * 14 + sinH * 12,
+        flight.y + 4,
+        flight.s - sinH * 14 + cosH * 12,
+        width,
+        height,
+        focal,
+      );
+      if (wingAt) {
+        const wingScale = Math.max(0.18, Math.min(0.9, wingAt.scale * 0.024 * 0.62));
+        drawAircraft(ctx, wingAt.x, wingAt.y, flight.bank, flight.pitch, wingScale, time, palette);
+      }
+    }
     const scale = Math.max(0.25, Math.min(1.35, planeAt.scale * 0.024));
     // Exhaust shimmer behind the tail while the engine runs.
     if (options.spawnExhaust && flight.fuel > 0 && !flight.crashed) {

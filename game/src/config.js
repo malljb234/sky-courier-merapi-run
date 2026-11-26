@@ -1,4 +1,5 @@
-// Sky Courier: Merapi Run — tuning constants and the game's one visual style.
+// MERAPI VECTOR (ELANG-7) — 3D Tactical Flight Simulator: tuning constants
+// and the game's one visual style.
 // Everything here is a plain number or colour so the rest of the code reads
 // like the thing it does. Units: metres, seconds, radians, kilograms of fuel
 // are abstract "units" the HUD shows as percent.

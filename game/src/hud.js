@@ -181,6 +181,44 @@ function drawBar(ctx, x, y, w, h, frac, color, palette, text) {
   if (text) label(ctx, text, x + w / 2, y + h / 2, 11, '#ffffff', 'center');
 }
 
+// The operation briefing panel: the op code, the callsign and the
+// sortie's three objectives with their live progress, so the frame
+// reads as a tactical simulator at a glance, not just a plane.
+function drawOpsPanel(ctx, flight, state, palette) {
+  const mission = state.mission;
+  const objectives = mission.objectives ?? [];
+  const x = 16;
+  const y = 186;
+  const w = 246;
+  const h = 34 + objectives.length * 22 + 10;
+  glassPanel(ctx, x, y, w, h, 10, palette);
+  label(ctx, 'OP MERAPI VECTOR · OP-MV-07', x + w / 2, y + 16, 11, palette.hudAmber);
+  label(ctx, `ELANG-7 · ${mission.name.toUpperCase()}`, x + w / 2, y + 32, 11, '#eaf7ff');
+  const id = mission.id;
+  const fuelText = `${Math.round(flight.fuel)}% FUEL`;
+  const lives = [];
+  if (id === 'rings') {
+    lives.push(`${state.ringsPassed}/8`, '', fuelText);
+  } else if (id === 'landing') {
+    lives.push(flight.onGround ? 'ON GROUND' : 'AIRBORNE', '', fuelText);
+  } else if (id === 'drop') {
+    lives.push(`${state.zonesHit ?? 0}/3 ZONES`, `${state.cratesDropped}/3 CRATES`, fuelText);
+  } else {
+    lives.push(`${(flight.distanceFlown / 1000).toFixed(1)} KM`, '', fuelText);
+  }
+  const headlineDone =
+    (id === 'rings' && state.ringsPassed >= 8) ||
+    (id === 'drop' && (state.zonesHit ?? 0) >= 3) ||
+    ((id === 'landing') && state.finished && !state.failed);
+  objectives.forEach((objective, i) => {
+    const rowY = y + 52 + i * 22;
+    const done = i === 0 && headlineDone;
+    label(ctx, done ? '✓' : '○', x + 14, rowY, 10, done ? palette.hudGreen : '#9fc6dd', 'left');
+    label(ctx, objective, x + 28, rowY, 10, done ? palette.hudGreen : '#d7edf8', 'left');
+    if (lives[i]) label(ctx, lives[i], x + w - 10, rowY, 10, palette.hudAmber, 'right');
+  });
+}
+
 // The whole HUD for one frame.
 export function drawHUD(ctx, width, height, flight, mission, status, palette, time) {
   const p = palette ?? CONFIG.palette;
@@ -205,6 +243,9 @@ export function drawHUD(ctx, width, height, flight, mission, status, palette, ti
   // Vertical speed, under the altitude dial.
   const vs = Math.round(flight.verticalSpeed * 196.85);
   label(ctx, `V/S ${vs >= 0 ? '+' : ''}${vs} FPM`, width - 74, 196, 12, vs < -800 ? p.hudDanger : '#cfe9f7');
+
+  // Operation briefing panel, left of the frame.
+  if (mission && mission.mission) drawOpsPanel(ctx, flight, mission, p);
 
   // Mission banner: the goal, the progress, the score.
   if (mission && mission.mission) {

@@ -115,7 +115,7 @@ export function stageShot(name, world) {
     flight.throttle = 0.66;
     const targetFor = () => ({ x: ring.x, y: ring.y + 6, s: ring.s, speed: 58 });
     flyForward(world, 3.0, targetFor);
-    world.missionState.message = 'RING 2/8 — THREAD IT';
+    world.missionState.message = 'VECTOR RUN — GATE 2/8, HOLD THE LINE';
     world.missionState.messageUntil = 999;
     return;
   }
@@ -135,7 +135,7 @@ export function stageShot(name, world) {
     flyForward(world, 1.8, targetFor);
     dropCrate(world);
     flyForward(world, 0.8, targetFor);
-    world.missionState.message = 'CRATE AWAY — ON THE ZONE';
+    world.missionState.message = 'SUPPLY VECTOR — CRATE AWAY, ON THE ZONE';
     world.missionState.messageUntil = 999;
     return;
   }
@@ -149,7 +149,7 @@ export function stageShot(name, world) {
     flight.pitch = -0.05;
     const targetFor = () => ({ x: 0, y: 64, s: CONFIG.runwayStart + 240, speed: 44 });
     flyForward(world, 3.2, targetFor);
-    world.missionState.message = 'FINAL — GEAR DOWN, EASY DOES IT';
+    world.missionState.message = 'COASTAL APPROACH — GEAR DOWN, EASY DOES IT';
     world.missionState.messageUntil = 999;
     return;
   }
@@ -165,7 +165,7 @@ export function stageShot(name, world) {
   const approach = { x: 0, y: 85, s: CONFIG.runwayStart + 120 };
   const targetFor = () => ({ ...approach, speed: 52 });
   flyForward(world, 30, targetFor, (f) => distanceTo(f, approach.x, approach.y, approach.s) < 420);
-  world.missionState.message = 'ELANG-7 — FINAL APPROACH';
+  world.missionState.message = 'ELANG-7 · OP MERAPI VECTOR — FINAL APPROACH';
   world.missionState.messageUntil = 999;
 }
 
