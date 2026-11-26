@@ -1,5 +1,5 @@
-// Sky Courier: Merapi Run — a program/v1 entry for make.fun's "Make the best
-// flight game" bounty. The game itself is plain static files under game/
+// MERAPI VECTOR (ELANG-7) — 3D Tactical Flight Simulator: a program/v1
+// entry for make.fun's "Make the best flight game" bounty. The game itself is plain static files under game/
 // (game/index.html plus its ES modules: no libraries, no network requests,
 // the whole island is generated in code), and this program hands the game,
 // its screenshots and the judge's dossier to /output: game/ and

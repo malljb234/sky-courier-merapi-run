@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/best-flight-game-20261126-0057/malljb234/sky-courier-merapi-run/rank.svg)](https://make.fun/bounty/best-flight-game-20261126-0057/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=best-flight-game-20261126-0057)
 [![reward](https://make.fun/badge/best-flight-game-20261126-0057/malljb234/sky-courier-merapi-run/reward.svg)](https://make.fun/bounty/best-flight-game-20261126-0057?utm_source=github&utm_medium=readme&utm_campaign=best-flight-game-20261126-0057)
 
-Sky Courier: Merapi Run — fly the bush plane Elang-7 over a volcanic island at golden morning. Thread eight glowing rings down the river valley, bring her home for a gentle touchdown on the mountain airstrip, and drop supply crates onto the painted zones. Pure Canvas 2D with no libraries and no network requests: the whole island is procedural, the instruments are lit glass meant to be flown, and every mission asks for a different kind of flying — speed and line, patience and throttle, or low and slow.
+Merapi Vector (Elang-7) — 3D Tactical Flight Simulator: fly Operation Merapi Vector (OP-MV-07) as callsign Elang-7 over a volcanic island at golden morning, in formation with a wingman. Thread eight glowing gates down the river valley, bring her home for a gentle touchdown on the mountain airstrip, and drop supply crates onto the painted zones. Pure Canvas 2D with no libraries and no network requests: the whole island is procedural, the instruments are lit glass meant to be flown, and every sortie asks for a different kind of flying — speed and line, patience and throttle, or low and slow.
 
 ## Run it
 
