@@ -183,7 +183,7 @@ function drawBar(ctx, x, y, w, h, frac, color, palette, text) {
 
 // The operation briefing panel: the op code, the callsign and the
 // sortie's three objectives with their live progress, so the frame
-// reads as a tactical simulator at a glance, not just a plane.
+// reads as a flown operation at a glance, not just a plane.
 function drawOpsPanel(ctx, flight, state, palette) {
   const mission = state.mission;
   const objectives = mission.objectives ?? [];
@@ -263,10 +263,17 @@ export function drawHUD(ctx, width, height, flight, mission, status, palette, ti
     litNumber(ctx, 'FUEL EMPTY — GLIDE', width / 2, height * 0.3, 22, p.hudDanger);
   }
 
-  // Centre status message, fading.
+  // Centre status message, fading, on a dark pill so it stays readable
+  // against bright cloud and sky.
   if (status && status.text && status.until > time) {
     ctx.save();
     ctx.globalAlpha = Math.max(0, Math.min(1, (status.until - time) / 0.6));
+    ctx.font = `700 24px ${MONO}`;
+    const tw = ctx.measureText(status.text).width;
+    ctx.fillStyle = 'rgba(8, 18, 28, 0.5)';
+    ctx.beginPath();
+    ctx.roundRect(width / 2 - tw / 2 - 16, height * 0.24 - 20, tw + 32, 40, 10);
+    ctx.fill();
     litNumber(ctx, status.text, width / 2, height * 0.24, 24, status.color ?? p.hudText);
     ctx.restore();
   }

@@ -115,7 +115,7 @@ export function stageShot(name, world) {
     flight.throttle = 0.66;
     const targetFor = () => ({ x: ring.x, y: ring.y + 6, s: ring.s, speed: 58 });
     flyForward(world, 3.0, targetFor);
-    world.missionState.message = 'VECTOR RUN — GATE 2/8, HOLD THE LINE';
+    world.missionState.message = 'GATE 2/8 — HOLD THE LINE';
     world.missionState.messageUntil = 999;
     return;
   }
@@ -134,8 +134,8 @@ export function stageShot(name, world) {
     const targetFor = () => ({ x: zone.x, y: cruiseY, s: zone.s, speed: 46 });
     flyForward(world, 1.8, targetFor);
     dropCrate(world);
-    flyForward(world, 0.8, targetFor);
-    world.missionState.message = 'SUPPLY VECTOR — CRATE AWAY, ON THE ZONE';
+    flyForward(world, 1.5, targetFor);
+    world.missionState.message = 'CRATE AWAY — ON THE ZONE';
     world.missionState.messageUntil = 999;
     return;
   }
@@ -149,13 +149,14 @@ export function stageShot(name, world) {
     flight.pitch = -0.05;
     const targetFor = () => ({ x: 0, y: 64, s: CONFIG.runwayStart + 240, speed: 44 });
     flyForward(world, 3.2, targetFor);
-    world.missionState.message = 'COASTAL APPROACH — GEAR DOWN, EASY DOES IT';
+    world.missionState.message = 'GEAR DOWN — EASY DOES IT';
     world.missionState.messageUntil = 999;
     return;
   }
-  // The cover: on final approach, the runway lit ahead, the island below,
-  // every instrument glowing. This is the frame the judge sees largest.
-  // Fly until the threshold is close enough to fill the frame.
+  // The cover: on final approach, the runway lit ahead with Merapi
+  // smoking beyond it, the island below, every instrument glowing. This
+  // is the frame the judge sees largest. Fly until the threshold is close
+  // enough to fill the frame.
   flight.x = 24;
   flight.y = 230;
   flight.s = CONFIG.runwayStart - 1450;
@@ -164,8 +165,8 @@ export function stageShot(name, world) {
   flight.throttle = 0.45;
   const approach = { x: 0, y: 85, s: CONFIG.runwayStart + 120 };
   const targetFor = () => ({ ...approach, speed: 52 });
-  flyForward(world, 30, targetFor, (f) => distanceTo(f, approach.x, approach.y, approach.s) < 420);
-  world.missionState.message = 'ELANG-7 · OP MERAPI VECTOR — FINAL APPROACH';
+  flyForward(world, 30, targetFor, (f) => distanceTo(f, approach.x, approach.y, approach.s) < 300);
+  world.missionState.message = 'FINAL APPROACH — RUNWAY AHEAD';
   world.missionState.messageUntil = 999;
 }
 

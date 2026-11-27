@@ -81,7 +81,18 @@ export function groundColorRGB(x, s, h, palette) {
   else if (h > 150) hex = palette.rock;
   else if (n > 0.58) hex = palette.forest;
   else hex = n > 0.3 ? palette.grassLow : palette.grassHigh;
-  return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
+  const rgb = [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
+  // Volcanic ash: ground near the volcano weathers dark and ashen, so the
+  // island reads as a volcano's island as the pilot closes on the cone.
+  const ashT = Math.max(0, Math.min(1, (s - 5800) / 2400));
+  if (ashT > 0 && h >= 2) {
+    const ashH = Math.max(0, Math.min(1, (h - 110) / 110));
+    const ashW = ashT * (0.25 + 0.75 * ashH) * 0.7;
+    const ashHex = n > 0.5 ? palette.ashLight : palette.ashRock;
+    const ash = [parseInt(ashHex.slice(1, 3), 16), parseInt(ashHex.slice(3, 5), 16), parseInt(ashHex.slice(5, 7), 16)];
+    return rgb.map((v, i) => Math.round(v + (ash[i] - v) * ashW));
+  }
+  return rgb;
 }
 
 export function groundColor(x, s, h, palette) {

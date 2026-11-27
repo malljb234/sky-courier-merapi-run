@@ -5,6 +5,7 @@ import { CONFIG } from './config.js';
 import { focalLength, groundColorRGB, groundHeight, onRunway, project } from './terrain.js';
 import { drawAircraft, drawGroundShadow } from './aircraft.js';
 import { drawSky } from './sky.js';
+import { drawVolcano } from './volcano.js';
 import { drawHUD } from './hud.js';
 import { drawParticles, drawSpeedStreaks, drawSupplyCrate, spawnExhaust, stepParticles } from './effects.js';
 import { mulberry32 } from './random.js';
@@ -85,9 +86,10 @@ function drawTerrain(ctx, camera, width, height, focal, palette, zones) {
         // Slope shading: ground rising away from the camera catches the
         // morning sun, ground falling away sinks into shadow, and slopes
         // facing the sun (left) read lighter than slopes facing away.
+        // Kept gentle: hard per-quad bands read as slabs, not hills.
         const alongSlope = (a.gy - d.gy) / Math.max(1, prev.depth - depth);
         const lateralSlope = (a.gy - b.gy) / Math.max(1, (prev.depth * tanHalfH * 2.24) / COLUMNS);
-        const shade = Math.max(0.62, Math.min(1.28, 1 + alongSlope * 1.6 + lateralSlope * 0.7));
+        const shade = Math.max(0.72, Math.min(1.18, 1 + alongSlope * 1.6 + lateralSlope * 0.7));
         ctx.fillStyle = hazeColor(a.color, prev.depth, palette);
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
@@ -97,10 +99,10 @@ function drawTerrain(ctx, camera, width, height, focal, palette, zones) {
         ctx.closePath();
         ctx.fill();
         if (shade < 0.99) {
-          ctx.fillStyle = `rgba(8, 14, 26, ${(1 - shade) * 0.55})`;
+          ctx.fillStyle = `rgba(8, 14, 26, ${(1 - shade) * 0.38})`;
           ctx.fill();
         } else if (shade > 1.01) {
-          ctx.fillStyle = `rgba(255, 246, 220, ${(shade - 1) * 0.5})`;
+          ctx.fillStyle = `rgba(255, 246, 220, ${(shade - 1) * 0.35})`;
           ctx.fill();
         }
       }
@@ -220,6 +222,9 @@ export function renderScene(ctx, world, width, height, time, options = {}) {
   const rng = options.rng ?? mulberry32(99);
 
   drawSky(ctx, width, height, camera.heading, time, palette, world.clouds, camera, focal);
+  // Mount Merapi itself, standing beyond the airstrip: the volcano is the
+  // frame's landmark, and the near terrain paints over its foot.
+  drawVolcano(ctx, camera, width, height, focal, time, palette);
   const showZones = world.mission.id === 'drop' ? world.zones : null;
   drawTerrain(ctx, camera, width, height, focal, palette, showZones);
 
@@ -255,7 +260,7 @@ export function renderScene(ctx, world, width, height, time, options = {}) {
   }
   if (planeAt) {
     // Wingman in formation, 14 m to starboard and 12 m ahead: the sortie
-    // flies as a pair, and the frame says tactical at a glance.
+    // flies as a pair, and the frame reads as formation flying.
     if (!flight.crashed) {
       const sinH = Math.sin(flight.heading);
       const cosH = Math.cos(flight.heading);

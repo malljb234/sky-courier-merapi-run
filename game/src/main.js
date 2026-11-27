@@ -114,7 +114,7 @@ function runGame() {
   function titleLines() {
     const lines = [
       { text: 'MERAPI VECTOR', style: 'title' },
-      { text: '(ELANG-7) — 3D Tactical Flight Simulator', style: 'big' },
+      { text: '(ELANG-7) — Volcano Chase Flight', style: 'big' },
       { text: 'OPERATION MERAPI VECTOR · OP-MV-07 · CALLSIGN ELANG-7', color: '#ffc857' },
       { text: 'Arrows / WASD steer · Shift / Ctrl throttle · Space acts · P pauses · M mutes', color: '#9fc6dd' },
       { text: '', style: 'plain' },

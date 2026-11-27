@@ -1,4 +1,4 @@
-// MERAPI VECTOR (ELANG-7) — 3D Tactical Flight Simulator: tuning constants
+// MERAPI VECTOR (ELANG-7) — Volcano Chase Flight: tuning constants
 // and the game's one visual style.
 // Everything here is a plain number or colour so the rest of the code reads
 // like the thing it does. Units: metres, seconds, radians, kilograms of fuel
@@ -49,6 +49,11 @@ export const CONFIG = {
     sunGlow: 'rgba(255, 214, 130, 0.55)',
     mountainFar: '#7d8fb8',
     mountainNear: '#5d7396',
+    volcanoRock: '#7d6248',
+    volcanoShade: '#5f5044',
+    volcanoAsh: '#c9bba6',
+    ashRock: '#776b5e',
+    ashLight: '#97897a',
     grassLow: '#69a84f',
     grassHigh: '#4d8a44',
     forest: '#2f6b3a',

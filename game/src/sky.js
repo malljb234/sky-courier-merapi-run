@@ -93,6 +93,12 @@ function drawCloudPuff(ctx, x, y, size, puff, time, seed, alpha) {
   ctx.ellipse(x - s * 0.55 + drift, y + s * 0.08, s * 0.62, s * 0.26 * puff, 0, 0, Math.PI * 2);
   ctx.ellipse(x + s * 0.55 + drift, y + s * 0.06, s * 0.66, s * 0.28 * puff, 0, 0, Math.PI * 2);
   ctx.fill();
+  // Warm rim on the sun side, so the clouds sit in the same golden
+  // morning as the terrain instead of pasted white.
+  ctx.fillStyle = 'rgba(255, 233, 196, 0.5)';
+  ctx.beginPath();
+  ctx.ellipse(x - s * 0.3 + drift, y - s * 0.1, s * 0.62, s * 0.2 * puff, 0, 0, Math.PI * 2);
+  ctx.fill();
   ctx.fillStyle = 'rgba(214, 228, 240, 0.55)';
   ctx.beginPath();
   ctx.ellipse(x + drift, y + s * 0.16, s * 0.9, s * 0.2 * puff, 0, 0, Math.PI * 2);

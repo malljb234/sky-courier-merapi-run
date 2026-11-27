@@ -9,41 +9,41 @@ export const OPERATION = {
   name: 'OPERATION MERAPI VECTOR',
   code: 'OP-MV-07',
   callsign: 'ELANG-7',
-  title: 'MERAPI VECTOR (ELANG-7) — 3D Tactical Flight Simulator',
+  title: 'MERAPI VECTOR (ELANG-7) — Volcano Chase Flight',
 };
 
 export const MISSIONS = [
   {
     id: 'rings',
-    name: 'Vector Run',
+    name: 'Gate Chase',
     tagline: 'Thread all 8 gates down the river valley before the fuel runs dry.',
     objectives: ['THREAD 8 GATES', 'HOLD A CLEAN LINE', 'FINISH WITH FUEL'],
     start: { x: 0, y: 150, s: 0, heading: 0, speed: 52, throttle: 0.55 },
-    banner: 'OP MERAPI VECTOR — VECTOR RUN · thread the gates in order',
+    banner: 'OP MERAPI VECTOR — GATE CHASE · thread the gates in order',
   },
   {
     id: 'landing',
-    name: 'Coastal Approach',
-    tagline: 'Bring Elang-7 home: a gentle touchdown on the mountain airstrip.',
+    name: 'Volcano Chase',
+    tagline: 'Bring Elang-7 home: a gentle touchdown on the mountain airstrip, under the volcano.',
     objectives: ['FLY THE FINAL', 'TOUCH DOWN GENTLY', 'STAY ON THE STRIP'],
     start: { x: 40, y: 220, s: 3600, heading: 0, speed: 56, throttle: 0.42 },
-    banner: 'OP MERAPI VECTOR — COASTAL APPROACH · land on the strip, gently',
+    banner: 'OP MERAPI VECTOR — VOLCANO CHASE · land on the strip, gently',
   },
   {
     id: 'drop',
-    name: 'Supply Vector',
+    name: 'Supply Chase',
     tagline: 'Drop three crates onto the painted zones. Low and slow wins.',
     objectives: ['HIT 3 PAINTED ZONES', 'DROP LOW AND SLOW', '3 CRATES ONLY'],
     start: { x: 0, y: 230, s: 1200, heading: 0, speed: 50, throttle: 0.5 },
-    banner: 'OP MERAPI VECTOR — SUPPLY VECTOR · Space drops a crate over each zone',
+    banner: 'OP MERAPI VECTOR — SUPPLY CHASE · Space drops a crate over each zone',
   },
   {
     id: 'free',
-    name: 'Island Patrol',
-    tagline: 'No orders. Just the island, the morning and the fuel you carry.',
+    name: 'Merapi Patrol',
+    tagline: 'No orders. Just the island, the volcano, the morning and the fuel you carry.',
     objectives: ['PATROL THE ISLAND', 'WATCH THE FUEL', 'LAND WHEN READY'],
     start: { x: 0, y: 210, s: 0, heading: 0, speed: 52, throttle: 0.55 },
-    banner: 'OP MERAPI VECTOR — ISLAND PATROL · explore the island',
+    banner: 'OP MERAPI VECTOR — MERAPI PATROL · explore the island',
   },
 ];
 
